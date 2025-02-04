@@ -2,24 +2,12 @@
 
 # Function to start the LLM service
 start_service() {
-    echo "Cloning or updating the repository..."
-    if [ ! -d "/opt/llmdocker" ]; then
-        echo "llmdocker project is downloading in /opt/llmdocker"
-        sudo git clone https://github.com/ITrackU/llmdocker.git /opt/llmdocker
-        echo "Please care to install llmdocker script before using this command !"
-        exit
-    else
-        cd /opt/llmdocker && sudo git pull
-    fi
-
     echo "Starting LLM service with Docker Compose..."
     cd /opt/llmdocker
     sudo docker-compose up -d
-
     echo "Verifying running containers..."
     sudo docker ps
-
-    echo "LLM service is up and running!"
+    echo "LLM service is up and running at http://localhost:8080"
 }
 
 # Function to stop the LLM service
