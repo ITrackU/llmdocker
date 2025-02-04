@@ -1,39 +1,48 @@
 version: '3.8'
-
 services:
+  # Ollama service - Local LLM server
   ollama:
     image: ollama/ollama
     container_name: llm_ollama
     networks:
       - llm_network
     volumes:
-      - ollama:/root/.ollama
+      - ollama_data:/root/.ollama
     deploy:
       resources:
         reservations:
           devices:
             - capabilities: [gpu]
-    # REMOVE port exposure to keep Ollama internal
-    # ports:
-    #   - "11434:11434"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
+  # Open WebUI - Web interface for Ollama
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: llm_open-webui
     networks:
       - llm_network
     volumes:
-      - open-webui:/app/backend/data
+      - webui_data:/app/backend/data
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
-    restart: always
     ports:
-      - "8080:8080" # ONLY expose Open-WebUI externally
+      - "8080:8080"
+    restart: always
+    depends_on:
+      ollama:
+        condition: service_healthy
 
 networks:
   llm_network:
     driver: bridge
+    name: llm_network
 
 volumes:
-  ollama:
-  open-webui:
+  ollama_data:
+    name: llm_ollama_data
+  webui_data:
+    name: llm_webui_data
