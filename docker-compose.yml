@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    networks:
+      - llm_network
+    volumes:
+      - ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    # REMOVE port exposure to keep Ollama internal
+    # ports:
+    #   - "11434:11434"
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    networks:
+      - llm_network
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    restart: always
+    ports:
+      - "8080:8080" # ONLY expose Open-WebUI externally
+
+networks:
+  llm_network:
+    driver: bridge
+
+volumes:
+  ollama:
+  open-webui:
