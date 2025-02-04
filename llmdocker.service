@@ -1,0 +1,14 @@
+[Unit]
+Description=LLM Docker Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/llmdocker --start
+ExecStop=/usr/local/bin/llmdocker --stop
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
