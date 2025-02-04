@@ -30,11 +30,12 @@ chmod +x "$BIN_PATH"
 # Create systemd service file
 echo "Creating systemd service..."
 cp "$SCRIPT_DIR/llmdocker.service" "$SERVICE_PATH"
+chown root:root "$SERVICE_PATH"
+chmod 644 "$SERVICE_PATH"
 
 # Set proper permissions for all files
 chown -R root:root "$INSTALL_DIR"
 chmod -R 755 "$INSTALL_DIR"
-chmod 644 "$SERVICE_PATH"
 
 # Reload systemd daemon and enable service
 echo "Configuring systemd service..."
