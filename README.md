@@ -25,6 +25,7 @@ The project consists of two dockers main services:
 - Git (for cloning the repository)
 - Sudo privileges
 - (Optional) NVIDIA GPU with appropriate drivers for acceleration
+- Please check https://github.com/ITrackU/gpudockercheck to install all the prerequisites on Unix environments
 
 ## Installation
 
