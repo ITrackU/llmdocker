@@ -27,7 +27,7 @@ cat "$SCRIPT_DIR/llmdocker" > "$BIN_PATH"
 chmod +x "$BIN_PATH"
 
 # Set proper permissions for the installation directory
-chown -R root:root "$INSTALL_DIR"
+chown -R $USER:$USER "$INSTALL_DIR"
 chmod -R 755 "$INSTALL_DIR"
 
 # Verify the installation
