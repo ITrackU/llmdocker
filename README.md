@@ -162,10 +162,3 @@ sudo rm -rf /opt/llmdocker
 docker volume rm llm_ollama_data llm_webui_data
 ```
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or create issues for bugs and feature requests.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
