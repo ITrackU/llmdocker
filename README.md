@@ -4,9 +4,9 @@ A streamlined setup for running a local Large Language Model (LLM) server using 
 
 ## Architecture
 
-The project consists of two main services:
+The project consists of two dockers main services:
 
-1. **Ollama**: A lightweight LLM server that runs models locally
+1. **Ollama**: A lightweight LLM server that runs models
    - Supports GPU acceleration
    - Runs in an isolated container
    - Data persistence through Docker volumes
@@ -36,6 +36,7 @@ cd llmdocker
 
 2. Run the installation script:
 ```bash
+chmod +x ./install.sh
 sudo ./install.sh
 ```
 
@@ -70,7 +71,7 @@ sudo systemctl disable llmdocker
 
 ### Command Line Interface
 
-The `llmdocker` command is available for manual control:
+The `llmdocker` command is available for manual control (service has to be stopped for proper use):
 
 ```bash
 # Start the services
