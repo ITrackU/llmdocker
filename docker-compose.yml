@@ -3,7 +3,7 @@ version: '3.8'
 services:
   ollama:
     image: ollama/ollama
-    container_name: ollama
+    container_name: llm_ollama
     networks:
       - llm_network
     volumes:
@@ -19,7 +19,7 @@ services:
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
-    container_name: open-webui
+    container_name: llm_open-webui
     networks:
       - llm_network
     volumes:
