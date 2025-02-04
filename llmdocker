@@ -4,7 +4,10 @@
 start_service() {
     echo "Cloning or updating the repository..."
     if [ ! -d "/opt/llmdocker" ]; then
+        echo "llmdocker project is downloading in /opt/llmdocker"
         sudo git clone https://github.com/ITrackU/llmdocker.git /opt/llmdocker
+        echo "Please care to install llmdocker script before using this command !"
+        exit
     else
         cd /opt/llmdocker && sudo git pull
     fi
